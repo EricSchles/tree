@@ -1,22 +1,18 @@
 from tree_pure import BinaryTree
 
-def test_add_right():
-    tree = BinaryTree(1)
-    tree.add_right(2)
-    tree.add_right(3)
-    assert tree.contains(1) == True
-    assert tree.contains(2) == True
-    assert tree.contains(3) == True
-    assert tree.contains(4) == False
+def test_insert():
+    bt = BinaryTree(1)
+    bt.insert(2)
+    bt.insert(3)
+    bt.insert(4)
+    assert bt.contains(1) == True
+    assert bt.contains(2) == True
+    assert bt.contains(3) == True
+    assert bt.contains(4) == True
+    assert bt.contains(5) == False
 
-def test_add_left():
-    tree = BinaryTree(1)
-    tree.add_right(2)
-    tree.add_right(3)
-    assert tree.contains(1) == True
-    assert tree.contains(2) == True
-    assert tree.contains(3) == True
-    assert tree.contains(4) == False
+
+
 
 
 
