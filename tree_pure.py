@@ -73,11 +73,7 @@ class BinaryTree:
         else:
             return False
         
-        
-        
-    
-    
-    
+            
     # def _contains(self,val,curr):
     #     #print curr.item
     #     if curr.item == val: return True
@@ -102,7 +98,92 @@ class BinaryTree:
         self._pretty_print(node.right,count)
 
 
-                    
+    def second_highest_node(self,node):
+        if node.right != None:
+            return self._second_highest_node(node)
+        else:
+            return None
+
+    def _second_highest_node(self,curr):
+        next_node = curr.right
+        if next_node.right != None:
+            return self._second_highest_node(next_node)
+        else:
+            return curr
+
+    def highest(self,node):
+        return self._highest(node)
+        
+    def _highest(self,curr):
+        if curr.right != None:
+            return self._highest(curr.right)
+        else:
+            return curr.item
+    
+    def second_lowest_node(self,node):
+        if node.left != None:
+            return self._second_lowest_node(node)
+        else:
+            return None
+    def _second_lowest_node(self,curr):
+        next_node = curr.left
+        if next_node.left != None:
+            return self._second_highest_node(next_node)
+        else:
+            return curr
+
+    def lowest(self,node):
+        return self._lowest(node)
+
+    def _lowest(self,curr):
+        if curr.left != None:
+            return self._lowest(curr.left)
+        else:
+            return curr.item
+
+    def delete(self,value):
+        return self._delete(self.root,value,None)
+
+    def _delete(self,curr,value,parent):
+        if value == curr.item:
+            if curr.left != None:
+                curr.item = self.highest(curr.left)
+                second_largest_node = self.second_highest_node(curr.left)
+                if second_largest_node != None:
+                    second_largest_node.right = None
+                    return value
+                else:
+                    curr.left = None
+                    return value 
+
+            elif curr.right != None:
+                curr.item = self.lowest(curr.right)
+                second_smallest_node = self.second_lowest_node(curr.right)
+                if second_smallest_node != None:
+                    second_smallest_node.left = None
+                    return value
+                else:
+                    curr.right = None
+                    return value
+            else:
+                if parent.left.item == value:
+                    parent.left = None
+                    return value
+                else:
+                    parent.right = None
+                    return value
+                
+        else:
+            is_not_in_tree = True
+            if curr.left != None:
+                is_not_in_tree = False
+                self._delete(curr.left,value,curr)
+            if curr.right != None:
+                is_not_in_tree = False
+                self._delete(curr.right,value,curr)
+            if is_not_in_tree:
+                return None
+
                     
                 
             
